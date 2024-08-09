@@ -31,7 +31,7 @@ class EstoqueController{
 
             echo '<script type="text/javascript">
                     window location = "?pgestoques";
-                    </script>'
+                    </script>';
         }catch(PDOException $e){
             echo 'Erro ao adicionar estoque' . $e->getMessage();
         }
@@ -54,7 +54,7 @@ class EstoqueController{
 
             echo '<script type="text/javascript">
                     window location = "?pgestoques";
-                    </script>'
+                    </script>';
         }catch(PDOException $e){
             echo 'Erro ao adicionar estoque' . $e->getMessage();
         }
