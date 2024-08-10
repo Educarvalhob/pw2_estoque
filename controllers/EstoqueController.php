@@ -1,6 +1,20 @@
 <?php
 class EstoqueController{
 
+    public function findAll(){
+        $conexao = Conexao::getInstance();
+
+        $stmt = $conexao->prepare("SELECT * FROM estoque");
+
+        $stmt->execute();
+        $estoques = array();
+
+        while($estoque = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $estoques[] = new Estoque($estoque["id"], $estoque["produto"], $estoque["quantidade"]);
+        }
+        return $estoques;
+    }
+
     public function findById($id){
         try{
             $conexao = Conexao::getInstance();
