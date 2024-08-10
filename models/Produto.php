@@ -32,7 +32,7 @@ class Produto{
     }
 
     function getNome(){
-        return $this->Nome;
+        return $this->nome;
     }
     
     function setNome($nome){

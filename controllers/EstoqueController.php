@@ -23,8 +23,15 @@ class EstoqueController{
     public function addEstoque($id, $quantidade){
         try{
             $conexao = Conexao::getInstance();
-            $stmt = $conexao->prepare("UPDATE estoque SET quantidade = quantidade + :quantidade WHERE id = :id");
-            $stmt->bindParam(":id", $id);
+            
+            $estoque = $this->findById($id);
+
+            if($estoque == null){
+                $stmt = $conexao->prepare("INSERT INTO estoque (id, id_produto, quantidade) VALUES (null, :id_produto, :quantidade)");
+            }
+
+            $stmt = $conexao->prepare("UPDATE estoque SET quantidade = quantidade + :quantidade WHERE id_produto = :id_produto");
+            $stmt->bindParam(":id_produto", $id);
             $stmt->bindParam(":quantidade", $quantidade);
 
             $stmt->execute();
@@ -40,9 +47,9 @@ class EstoqueController{
     public function removeEstoque($id, $quantidade){
         try{
             $conexao = Conexao::getInstance();
-            $estoque = findbyId($id);
+            $estoque = $this->findbyId($id);
             if($estoque->getQuantidade() < $quantidade){
-                echo 'Quantidade indisponível em estoque' . $e->getMessage();
+                echo 'Quantidade indisponível em estoque';
                 return;
             }
 

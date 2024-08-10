@@ -9,7 +9,7 @@ class ProdutoController{
         $produtos = array();
 
         while($produto = $stmt->fetch(PDO::FETCH_ASSOC)) {
-            $produtos[] = new Produto($produto["id"], $produto["nome"]);
+            $produtos[] = new Produto($produto["id"], $produto["nome"], $produto["descricao"], $produto["categoria"], $produto["preco"]);
         }
         return $produtos;
     }
@@ -84,7 +84,7 @@ class ProdutoController{
             $stmt->execute();
             
             $resultado = $stmt->fetch(PDO::FETCH_ASSOC);
-            $produto = new Produto($resultado["id"], $resultado["nome"]);
+            $produto = new Produto($resultado["id"], $resultado["nome"], $resultado["descricao"], $resultado["categoria"], $resultado["preco"]);
             
             return $produto;
         }catch (PDOException $e){
