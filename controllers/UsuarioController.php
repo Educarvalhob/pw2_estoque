@@ -37,4 +37,10 @@ class UsuarioController {
             echo "Erro ao buscar a usuario: " . $e->getMessage();
         }
     }
+
+    public function logout() {
+        session_destroy();
+        header("Location: ?pg=login");
+        exit();
+    }
 }
